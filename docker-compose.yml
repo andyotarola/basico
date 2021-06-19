@@ -1,0 +1,21 @@
+version: "2"
+
+services: 
+
+    ng_proxy:
+        image: jwilder/nginx-proxy 
+        restart: always
+        ports: 
+            - "80:80"
+        volumes: 
+            - /var/run/docker.sock:/tmp/docker.sock
+
+    www:
+        image: nginx
+        restart: always
+        expose: 
+            - "80"
+        volumes: 
+            - .:/usr/share/nginx/html
+        environment: 
+            - VIRTUAL_HOST=andyotarola.xyz,www.andyotarola.xyz
